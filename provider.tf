@@ -7,7 +7,7 @@ data "google_client_config" "provider" {}
 
 data "google_container_cluster" "my_cluster" {
   name     = "${var.project_id}-cluster"
-  location = "us-central1"
+  location = var.region
   depends_on = [
     google_container_cluster.cluster,
   ]

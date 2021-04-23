@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-configmap
+data:
+  myvalue: "Hello World"
+  {{- with .Values.favorite }}
+  drink: {{ .drink | quote }}
+  food: {{ quote .food }}
+  root-scope-beer: {{ $.Values.favorite.drink }}
+  {{- end }}
+  upperFood: {{ .Values.favorite.food | upper | quote }}
+  repeatedDrink: {{ .Values.favorite.drink | repeat 5 | quote }}
+  defaultVal: {{ .Values.null | default "defaultVal" | quote }}
+  {{- if eq .Values.favorite.drink "root beer" }}
+  glass: "true"
+  {{- end }}
+

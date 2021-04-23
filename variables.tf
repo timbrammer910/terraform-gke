@@ -27,3 +27,8 @@ variable "application_name" {
   type    = string
   default = "my_application"
 }
+
+variable "license_key" {
+  type    = string
+  default = ""
+}

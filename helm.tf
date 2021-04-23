@@ -12,14 +12,14 @@ resource "helm_release" "kubeview" {
 
 resource "helm_release" "newrelic" {
 
-  name = "newrelic-bundle"
+  name       = "newrelic-bundle"
   repository = "https://helm-charts.newrelic.com"
-  chart = "nri-bundle"
-  namespace = kubernetes_namespace.newrelic.metadata[0].name
+  chart      = "nri-bundle"
+  namespace  = kubernetes_namespace.newrelic.metadata[0].name
 
   set {
     name  = "global.licenseKey"
-    value = "efe224a34367f95a6fda79d198d83a557d68NRAL"
+    value = var.license_key
   }
 
   set {
@@ -59,9 +59,9 @@ resource "helm_release" "newrelic" {
 }
 
 resource "helm_release" "demo-app" {
-  
-  name       = "demo-app"
-  chart      = "${path.module}/demo-app-chart"
+
+  name  = "demo-app"
+  chart = "${path.module}/demo-app-chart"
 
   # values = [
   #   file("${path.module}/demo-app-values.yaml")
@@ -80,6 +80,6 @@ resource "helm_release" "demo-app" {
 
 resource "null_resource" "chart-update" {
   triggers = {
-    chart = sha1(join("", [for f in fileset("${path.module}/demo-app-chart", "**"): filesha1("${path.module}/demo-app-chart/${f}")]))
+    chart = sha1(join("", [for f in fileset("${path.module}/demo-app-chart", "**") : filesha1("${path.module}/demo-app-chart/${f}")]))
   }
 }

@@ -4,7 +4,9 @@ https://cloud.google.com/sdk/docs/install
 
 From a shell:
 gcloud init
+
 gcloud auth application-default login
+
 
 Set env var with New Relic account ID and API key:
 

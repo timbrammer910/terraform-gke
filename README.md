@@ -2,7 +2,9 @@ Setup Google Cloud Credentials:
 
 https://cloud.google.com/sdk/docs/install
 
+
 From a shell:
+
 gcloud init
 
 gcloud auth application-default login
